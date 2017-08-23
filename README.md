@@ -2,5 +2,5 @@
 Jisc assessment task
 
 git clone https://github.com/hosehali/jisc_assess.git
-
-python jisc_assess/get_journals.py
+cd jisc_assess
+python process_xml.py
