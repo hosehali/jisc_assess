@@ -1,6 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # Test script to list journals
-import urllib2
+import urllib.request
 from datetime import datetime
 from xml.dom.minidom import parseString
 
@@ -15,12 +15,12 @@ class ProcessXML(object):
 
     def __init__(self):
         try:
-            xml = urllib2.urlopen(url_list)
+            xml = urllib.request.urlopen(url_list)
             dom = parseString(xml.read())
             self.results = dom.getElementsByTagName("result")
-        except Exception, err:
+        except Exception as err:
             self.errors.append(err)
-            print 'Cannot open URL = %s' % url_list
+            print('Cannot open URL = %s' % url_list)
 
     def print_journals(self):
         """Test method to check we can get data"""
@@ -30,7 +30,7 @@ class ProcessXML(object):
             if journal not in journals:
                 journals.append(journal)
         for journal in journals:
-            print journal
+            print(journal)
 
     def populate_articles(self):
         """Fetch data and create articles"""
@@ -42,13 +42,13 @@ class ProcessXML(object):
         count = 0
         for article in self.articles:
             count += 1
-            print count
-            print article.journal
-            print ' '.join(article.journal_issns)
-            print article.article_id
-            print article.publication_date
-            print article.title
-            print '----------------------------'
+            print(count)
+            print(article.journal)
+            print(' '.join(article.journal_issns))
+            print(article.article_id)
+            print(article.publication_date)
+            print(article.title)
+            print('----------------------------')
 
     def get_earliest(self):
         earliest = datetime(3000, 1, 1)
@@ -74,7 +74,7 @@ class ProcessXML(object):
         """Run the output"""
         self.populate_articles()
         self.print_articles()
-        print self.get_summary()
+        print(self.get_summary())
         self.log_errors()
         
 processXML = ProcessXML()
